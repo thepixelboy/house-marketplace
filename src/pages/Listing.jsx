@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { getDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
 import Spinner from "../components/Spinner";
 import shareIcon from "../assets/svg/shareIcon.svg";
 import formatMoney from "../helpers/MoneyFormatter.js";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/a11y";
 
 function Listing() {
   const [listing, setListing] = useState(null);
@@ -38,7 +45,24 @@ function Listing() {
 
   return (
     <main>
-      {/* TODO: Slider */}
+      <Swiper
+        modules={[Navigation, Pagination, A11y]}
+        slidesPerView={1}
+        navigation={true}
+        a11y={true}
+        pagination={{ clickable: true }}
+      >
+        {listing.imageUrls.map((image, index) => (
+          <SwiperSlide key={index}>
+            <img
+              style={{ width: "100%", height: "auto" }}
+              src={image}
+              alt="{listing.title}"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
       <div
         className="shareIconDiv"
         onClick={() => {
