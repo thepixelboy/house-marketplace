@@ -1,19 +1,20 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { Navigation, Pagination, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { getDoc, doc } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import { db } from "../firebase.config";
-import Spinner from "../components/Spinner";
-import shareIcon from "../assets/svg/shareIcon.svg";
-import formatMoney from "../helpers/MoneyFormatter.js";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/a11y";
+
+import { A11y, Navigation, Pagination } from "swiper";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+import Spinner from "../components/Spinner";
+import { db } from "../firebase.config";
+import formatMoney from "../helpers/MoneyFormatter.js";
+import { getAuth } from "firebase/auth";
+import shareIcon from "../assets/svg/shareIcon.svg";
 
 function Listing() {
   const [listing, setListing] = useState(null);
@@ -30,7 +31,6 @@ function Listing() {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
         setListing(docSnap.data());
         setLoading(false);
       }
