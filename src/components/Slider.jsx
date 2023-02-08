@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
-import { db } from "../firebase.config";
-import { Navigation, Pagination, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import Spinner from "./Spinner";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/a11y";
+
+import { A11y, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+import Spinner from "./Spinner";
+import { db } from "../firebase.config";
+import { useNavigate } from "react-router-dom";
 
 function Slider() {
   const [loading, setLoading] = useState(true);
@@ -38,6 +39,10 @@ function Slider() {
 
   if (loading) {
     return <Spinner />;
+  }
+
+  if (!listings.length === 0) {
+    return <></>;
   }
 
   return (
