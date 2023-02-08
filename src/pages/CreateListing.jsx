@@ -1,19 +1,21 @@
-import { useState, useEffect, useRef } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
+  getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-  getDownloadURL,
 } from "firebase/storage";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase.config";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useRef, useState } from "react";
+
 import Spinner from "../components/Spinner";
+import { db } from "../firebase.config";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 function CreateListing() {
+  // eslint-disable-next-line no-unused-vars
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -66,6 +68,7 @@ function CreateListing() {
     return () => {
       isMounted.current = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted]);
 
   const onSubmit = async (e) => {

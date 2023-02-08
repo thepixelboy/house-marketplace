@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 
 function EditListing() {
+  // eslint-disable-next-line no-unused-vars
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [listing, setListing] = useState(null);
@@ -61,6 +62,7 @@ function EditListing() {
       toast.error("You do not have permission to edit this listing");
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listing]);
 
   // Fetch listing to edit
@@ -98,6 +100,7 @@ function EditListing() {
     return () => {
       isMounted.current = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted]);
 
   const onSubmit = async (e) => {

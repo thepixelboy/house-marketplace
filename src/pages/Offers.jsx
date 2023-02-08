@@ -14,15 +14,12 @@ import ListingItem from "../components/ListingItem";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
 
 function Offers() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastFetchedListing, setLastFetchedListing] = useState(null);
   const [count, setCount] = useState(null);
-
-  const params = useParams();
 
   useEffect(() => {
     const fetchListings = async () => {
